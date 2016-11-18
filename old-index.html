@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>React Webpack ES6 ( Babel )</title>
+		<style>
+			body { font-family: Arial; font-size: 14px; line-height: 1.8 }
+			code { background-color: #EEE; border: 1px solid #CCC; padding: 2px;}
+			pre { background-color: #EEE; border: 1px solid #CCC; padding: 10px; border-radius: 3px; }
+			.note { background-color: #f9f9de; border: 1px solid #f99139; padding: 2em; }
+			#app { border: 1px solid green; padding: 2em; text-align: center; }
+		</style>
+	<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+	<!--<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.js"></script>-->
+		<script src="js/jquery-3.1.1.js"></script>
+	</head>
+	<body>
+		<div style="display:none;">
+			<h2>Documentation</h2>
+			<p><strong>React Webpack ES6 ( Babel ) Example</strong></p>
+			<p>This example shows React using ES6 ( Webpack for bundling transpiled JS files using Babel )</p>
+			<p>First create package.json file</p>
+			<p><strong>React</strong><br/> <code>npm install react react-dom --save</code></p>
+			<p><strong>Babel</strong><br/> <code>npm install babel-cli bable-loader babel-core babel-preset-es2015 babel-preset-react --save-dev</code></p>
+			<p><strong>webpack</strong><br/> <code>npm install webpack --save-dev</code></p>
+			<p><strong>package.json</strong></p>
+			<p>in <code>package.json</code> file in script block add <code>"webpack": "webpack --watch",</code> then in command prompt run <code>npm run webpack</code>. this will tell webpack.config.js file to watch changes in all the files of /src/ folder and will bundle main.js and all the imported files ( using babel-loader ) into a single file named bundle.js and will put it inside /build/ folder</p>
+			<p><code>"build:webpack": "webpack --config webpack.config.js"</code> is used to bundle all React files in one bundle.</p>
+			<p>If you want to transpile your ES6 code to ES5 then use <code>"build": "babel src -d build"</code>. In Command prompt run <code>npm run build</code>. This command will transpile all the files available in src folder and will put it inside build folder.</p>
+<pre>
+// package.json
+//====================================
+
+{
+	"name": "react_webpack_es6_example",
+	"dependencies": {
+		"react": "^15.3.2",
+		"react-dom": "^15.3.2"
+	},
+	"devDependencies": {
+		"babel-cli": "^6.16.0",
+		"babel-core": "^6.17.0",
+		"babel-loader": "^6.2.5",
+		"babel-preset-es2015": "^6.16.0",
+		"babel-preset-react": "^6.16.0",
+		"webpack": "^1.13.2"
+	},
+	"scripts": {
+		"compile": "babel-node server",
+		"webpack": "webpack --watch",
+		"build": "babel src -d build",
+		"serve": "node build/test1",
+		"build:webpack": "webpack --config webpack.config.js"
+	},
+	"babel": {
+		"presets": [
+			"es2015",
+			"react"
+		]
+	}
+}</pre>
+
+		<pre>
+// webpack.config.js
+//=======================================
+
+var path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+	  entry: './src/main.js',
+	  output: { path: __dirname +"/build/", filename: 'bundle.js' },
+	  module: {
+		    loaders: [
+			{
+				test: /.jsx?$/, // /\.js$/
+				loader: 'babel', // 'babel-loader' is also a valid name to reference
+				exclude: /(node_modules|bower_components)/,
+				query: {
+					presets: ['es2015', 'react']
+				}
+			}
+		]
+	  },
+};</pre>
+			<p>webpack.config.js file will first transform main.js file and all imported files in it from "src" folder using Babel-loader.</p>
+			<p>It will create one single file named bundle.js and will put it that single file in "build" folder.</p>
+			<div class="note"><strong>Note:</strong><br/>
+				<p>React will be served in browser using <code>Webpack+Babel</code>. Webpack will compile React files into single <code>bundle.js</code> file which we will include in index.html. </p>
+				
+				<p>While other Node.js code will be served using Node.js and NPM. Ex. server.js will be started using Node.js. Node.js v6.x supports many ES6 features. You can write ES6 code in node.js v6.x and for that you don't need Bable transpiler. But Currently node.js is not supporting some of the ES6 like <code>import</code> and <code>export</code> statements.If you want to use that features then use Babel.</p>
+				
+				<p>To use ES6 features which are not implemented in Node.js use Babel to transform ES6 code to ES5 using NPM script command <code>"build": "babel src -d build"</code> then in command prompt execute <code>npm run build</code>. this command will transform all ES6 files to ES5 which Browser and Node.js can understand.</p>
+				<p>Ex. <code>import http from 'http'</code> statement will be converted to <code>var http = require('http')</code></p>
+			</div>
+		</div>
+		<script>
+			$(document).ready(function() {
+			// url: './js/users-data.json',
+			// 'http://api.joind.in/v2.1/talks/10889'
+			
+/*
+// Example 1
+//==============================
+$.get("./js/users-data.json").done(function(response) {
+    console.log("Success", response);
+}).fail(function() {
+    console.log("Error");
+});
+*/
+
+/*
+// Example 2
+//==============================
+$.ajax({
+	url: "./js/users-data.json",
+	type: 'GET',
+	dataType: 'json'
+}).done(function( json ) {
+	console.log("Data : ", json);
+}).fail(function( xhr, status, errorThrown ) {
+	alert( "Sorry, there was a problem!" );
+	console.log( "Error: " + errorThrown );
+	console.log( "Status: " + status );
+	console.dir( xhr );
+});
+*/
+			
+			/* 
+			// Example 3
+//==============================
+			
+				$.ajax({
+					url: "./js/users-data.json",
+					type: 'GET',
+					dataType: 'json',
+					success: function( resp ) {
+						console.log(resp);
+					},
+					error: function( req, status, err ) {
+						console.log( 'something went wrong', status, err );
+					}
+				});
+			*/
+			
+/*			
+// Using the core $.ajax() method
+$.ajax({
+ 
+    // The URL for the request
+    url: "./js/users-data.json",
+ 
+    // The data to send (will be converted to a query string)
+    data: {
+        id: 123
+    },
+ 
+    // Whether this is a POST or GET request
+    type: "GET",
+ 
+    // The type of data we expect back
+    dataType : "json",
+})
+  // Code to run if the request succeeds (is done);
+  // The response is passed to the function
+  .done(function( json ) {
+     console.log("Data : ", json);
+  })
+  // Code to run if the request fails; the raw request and
+  // status codes are passed to the function
+  .fail(function( xhr, status, errorThrown ) {
+    alert( "Sorry, there was a problem!" );
+    console.log( "Error: " + errorThrown );
+    console.log( "Status: " + status );
+    console.dir( xhr );
+  })
+  // Code to run regardless of success or failure;
+  .always(function( xhr, status ) {
+    alert( "The request is complete!" );
+  });
+*/
+			
+			});			
+		</script>
+		<h3>React Output:</h3>
+		<div id="app"></div>
+	<!--<script>window.$ = window.jQuery = jQuery;</script>-->
+		<script src="build/bundle.js"></script>
+	</body>
+</html>			
