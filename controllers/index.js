@@ -9,7 +9,7 @@ router.use(function(req, res, next){
 });
 
 router.post('/home', function(req, res){
-
+	console.log("TEst :", req.originalUrl, req.url);
 	UserModel.createUser("Hiren", function(users) {
 		res.send({users : users});
 	});

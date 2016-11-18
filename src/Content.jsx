@@ -48,6 +48,23 @@ class Saves extends React.Component {
 }
 
 class MainBody extends React.Component {
+	handleSubmit(e) {
+		e.preventDefault();
+
+		$.ajax({
+			url: "/home",
+			type: 'POST',
+			data: {userName:"jignesh", age:35}
+		}).done(function( json ) {
+			console.log("AJAX Data : ", json);
+		}).fail(function( xhr, status, errorThrown ) {
+			alert( "Sorry, there was a problem!" );
+			console.log( "Error: " + errorThrown );
+			console.log( "Status: " + status );
+			console.dir( xhr );
+		});
+	}
+
 	render() {
 		return (
 			<div className="content" role="main">
@@ -68,6 +85,18 @@ class MainBody extends React.Component {
 					</div>
 
 				</div>
+
+				<form onSubmit={this.handleSubmit.bind(this)}>
+				  <div className="form-group">
+				    <label htmlFor="exampleInputEmail1">Email address</label>
+				    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Email" />
+				  </div>
+				  <div className="form-group">
+				    <label htmlFor="exampleInputPassword1">Password</label>
+				    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+				  </div>
+				  <button type="submit" className="btn btn-default">Submit</button>
+				</form>
 			</div>
 		)
 	}

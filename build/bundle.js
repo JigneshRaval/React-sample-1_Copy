@@ -21723,6 +21723,24 @@
 		}
 
 		_createClass(MainBody, [{
+			key: 'handleSubmit',
+			value: function handleSubmit(e) {
+				e.preventDefault();
+
+				$.ajax({
+					url: "/home",
+					type: 'POST',
+					data: { userName: "jignesh", age: 35 }
+				}).done(function (json) {
+					console.log("AJAX Data : ", json);
+				}).fail(function (xhr, status, errorThrown) {
+					alert("Sorry, there was a problem!");
+					console.log("Error: " + errorThrown);
+					console.log("Status: " + status);
+					console.dir(xhr);
+				});
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
@@ -21794,6 +21812,35 @@
 								{ role: 'tabpanel', className: 'tab-pane', id: 'settings' },
 								'...'
 							)
+						)
+					),
+					_react2.default.createElement(
+						'form',
+						{ onSubmit: this.handleSubmit.bind(this) },
+						_react2.default.createElement(
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'exampleInputEmail1' },
+								'Email address'
+							),
+							_react2.default.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', placeholder: 'Email' })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'exampleInputPassword1' },
+								'Password'
+							),
+							_react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword1', placeholder: 'Password' })
+						),
+						_react2.default.createElement(
+							'button',
+							{ type: 'submit', className: 'btn btn-default' },
+							'Submit'
 						)
 					)
 				);
