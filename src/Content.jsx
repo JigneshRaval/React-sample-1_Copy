@@ -53,7 +53,37 @@ class MainBody extends React.Component {
 		this.state = {
 			users : []
 		}
+
 	}
+
+  componentDidMount() {
+    this.getUsers();
+  }
+
+  getUsers() {
+    var _this = this;
+    this.setState({
+      users: []
+    });
+    $.ajax({
+      url: "/users",
+      type: 'GET',
+      dataType: 'json'
+    }).done(function( data ) {
+      console.log("getUsers: ", data);
+
+      _this.setState({
+        users: data.users
+      });
+
+    }).fail(function( xhr, status, errorThrown ) {
+      alert( "Sorry, there was a problem!" );
+      console.log( "Error: " + errorThrown );
+      console.log( "Status: " + status );
+      console.dir( xhr );
+    });
+  }
+
 	handleSubmit(e) {
 		e.preventDefault();
 		var _this = this;
@@ -68,11 +98,11 @@ class MainBody extends React.Component {
 			dataType: 'json',
 			data: {userName:formData.userName, password:formData.password}
 		}).done(function( data ) {
-			console.log("AJAX Data : ", data);
-
-			_this.setState({
-				users: data.users
-			});
+			console.log("AJAX Data 2: ", data);
+      _this.setState({
+        users: _this.state.users.concat([data.users])
+      })
+			//_this.state.users.push(data.users);
 
 		}).fail(function( xhr, status, errorThrown ) {
 			alert( "Sorry, there was a problem!" );
@@ -114,10 +144,12 @@ class MainBody extends React.Component {
 				  </div>
 				  <button type="submit" className="btn btn-default">Submit</button>
 				</form>
-
-				{this.state.users.map(function(user, i) {
-					return <p key={user._id}>{user.userName}</p>;
-				})}
+        <p>{this.state.users.userName}</p>
+        <ul>
+        {this.state.users.map(function(user, index) {
+          return (<li key={user._id}>{index} {user.userName}</li>);
+        })}
+        </ul>
 			</div>
 		)
 	}
