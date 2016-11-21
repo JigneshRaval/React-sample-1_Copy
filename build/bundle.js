@@ -21656,14 +21656,14 @@
 		function Saves() {
 			_classCallCheck(this, Saves);
 
-			var _this = _possibleConstructorReturn(this, (Saves.__proto__ || Object.getPrototypeOf(Saves)).call(this));
+			var _this2 = _possibleConstructorReturn(this, (Saves.__proto__ || Object.getPrototypeOf(Saves)).call(this));
 
-			_this.state = {
+			_this2.state = {
 				saved: false,
 				numSaves: 0
 			};
 			//this.handleSubmit = this.handleSubmit.bind(this);
-			return _this;
+			return _this2;
 		}
 
 		_createClass(Saves, [{
@@ -21719,20 +21719,35 @@
 		function MainBody() {
 			_classCallCheck(this, MainBody);
 
-			return _possibleConstructorReturn(this, (MainBody.__proto__ || Object.getPrototypeOf(MainBody)).apply(this, arguments));
+			var _this3 = _possibleConstructorReturn(this, (MainBody.__proto__ || Object.getPrototypeOf(MainBody)).call(this));
+
+			_this3.state = {
+				users: []
+			};
+			return _this3;
 		}
 
 		_createClass(MainBody, [{
 			key: 'handleSubmit',
 			value: function handleSubmit(e) {
 				e.preventDefault();
+				var _this = this;
 
+				var formData = {
+					userName: this.refs.userName.value,
+					password: this.refs.password.value
+				};
 				$.ajax({
 					url: "/home",
 					type: 'POST',
-					data: { userName: "jignesh", age: 35 }
-				}).done(function (json) {
-					console.log("AJAX Data : ", json);
+					dataType: 'json',
+					data: { userName: formData.userName, password: formData.password }
+				}).done(function (data) {
+					console.log("AJAX Data : ", data);
+
+					_this.setState({
+						users: data.users
+					});
 				}).fail(function (xhr, status, errorThrown) {
 					alert("Sorry, there was a problem!");
 					console.log("Error: " + errorThrown);
@@ -21823,9 +21838,9 @@
 							_react2.default.createElement(
 								'label',
 								{ htmlFor: 'exampleInputEmail1' },
-								'Email address'
+								'User Name'
 							),
-							_react2.default.createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', placeholder: 'Email' })
+							_react2.default.createElement('input', { type: 'userName', ref: 'userName', className: 'form-control', id: 'exampleInputEmail1', placeholder: 'User Name' })
 						),
 						_react2.default.createElement(
 							'div',
@@ -21835,14 +21850,21 @@
 								{ htmlFor: 'exampleInputPassword1' },
 								'Password'
 							),
-							_react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'exampleInputPassword1', placeholder: 'Password' })
+							_react2.default.createElement('input', { type: 'password', ref: 'password', className: 'form-control', id: 'exampleInputPassword1', placeholder: 'Password' })
 						),
 						_react2.default.createElement(
 							'button',
 							{ type: 'submit', className: 'btn btn-default' },
 							'Submit'
 						)
-					)
+					),
+					this.state.users.map(function (user, i) {
+						return _react2.default.createElement(
+							'p',
+							{ key: user._id },
+							user.userName
+						);
+					})
 				);
 			}
 		}]);

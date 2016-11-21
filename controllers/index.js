@@ -9,8 +9,8 @@ router.use(function(req, res, next){
 });
 
 router.post('/home', function(req, res){
-	console.log("TEst :", req.originalUrl, req.url);
-	UserModel.createUser("Hiren", function(users) {
+	console.log("TEst :", req.body);
+	UserModel.createUser([req.body.userName, req.body.password], function(users) {
 		res.send({users : users});
 	});
 	/*function createUser(userName, callback) {

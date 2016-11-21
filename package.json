@@ -1,6 +1,7 @@
 {
   "name": "react_webpack_es6_example",
   "dependencies": {
+    "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "nedb": "^1.8.0",
     "react": "^15.3.2",

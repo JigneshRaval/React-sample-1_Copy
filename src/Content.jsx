@@ -48,15 +48,32 @@ class Saves extends React.Component {
 }
 
 class MainBody extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			users : []
+		}
+	}
 	handleSubmit(e) {
 		e.preventDefault();
+		var _this = this;
 
+		var formData = {
+			userName : this.refs.userName.value,
+			password: this.refs.password.value
+		}
 		$.ajax({
 			url: "/home",
 			type: 'POST',
-			data: {userName:"jignesh", age:35}
-		}).done(function( json ) {
-			console.log("AJAX Data : ", json);
+			dataType: 'json',
+			data: {userName:formData.userName, password:formData.password}
+		}).done(function( data ) {
+			console.log("AJAX Data : ", data);
+
+			_this.setState({
+				users: data.users
+			});
+
 		}).fail(function( xhr, status, errorThrown ) {
 			alert( "Sorry, there was a problem!" );
 			console.log( "Error: " + errorThrown );
@@ -88,15 +105,19 @@ class MainBody extends React.Component {
 
 				<form onSubmit={this.handleSubmit.bind(this)}>
 				  <div className="form-group">
-				    <label htmlFor="exampleInputEmail1">Email address</label>
-				    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Email" />
+				    <label htmlFor="exampleInputEmail1">User Name</label>
+				    <input type="userName" ref="userName" className="form-control" id="exampleInputEmail1" placeholder="User Name" />
 				  </div>
 				  <div className="form-group">
 				    <label htmlFor="exampleInputPassword1">Password</label>
-				    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+				    <input type="password" ref="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
 				  </div>
 				  <button type="submit" className="btn btn-default">Submit</button>
 				</form>
+
+				{this.state.users.map(function(user, i) {
+					return <p key={user._id}>{user.userName}</p>;
+				})}
 			</div>
 		)
 	}

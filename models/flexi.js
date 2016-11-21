@@ -19,9 +19,9 @@ db.users.loadDatabase(function (err) {    // Callback is optional
 
 var UserModel = (function() {
 
-	function createUser(userName, callback) {
+	function createUser(data, callback) {
 		console.log("User Created");
-		db.users.insert({userName : userName}, function (err, newDocs) {
+		db.users.insert({userName : data[0], password: data[1]}, function (err, newDocs) {
 		  	// Two documents were inserted in the database
 		  	// newDocs is an array with these documents, augmented with their _id
 			console.log("Insert Error :", err);
