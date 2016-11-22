@@ -9,34 +9,17 @@ router.use(function(req, res, next){
 });
 
 router.post('/home', function(req, res){
-	console.log("TEst :", req.body);
-	UserModel.createUser([req.body.userName, req.body.password], function(users) {
-		res.send({users : users});
-	});
-	/*function createUser(userName, callback) {
-		console.log("User Created");
-		db.users.insert({userName : userName}, function (err, newDocs) {
-		  	// Two documents were inserted in the database
-		  	// newDocs is an array with these documents, augmented with their _id
-			console.log("Insert Error :", err);
-			callback(newDocs);
-		});
-	}*/
+	UserModel.createUser([req.body.userName, req.body.password], function(user) {
+		console.log("Home Router");
 
-});
-
-router.get('/home', function(req, res){
-	UserModel.getUser(function(users) {
-		res.send({users : users});
+		res.json({user : user});
 	});
 });
 
 router.get('/users', function(req, res){
-
 	UserModel.getUser(function(users) {
 		res.send({users : users});
 	});
-
 });
 
 module.exports = router;

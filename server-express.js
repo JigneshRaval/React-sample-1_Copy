@@ -17,7 +17,6 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(require('./controllers'));
 
-
 // START THE SERVER
 // ==============================================
 app.listen(port);
