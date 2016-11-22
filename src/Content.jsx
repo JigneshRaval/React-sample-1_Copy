@@ -36,17 +36,19 @@ class AddUserForm extends React.Component {
 
 	render() {
 		return (
-			<form ref="formAddUser" onSubmit={this.handleSubmit.bind(this)}>
-				<div className="form-group">
-					<label htmlFor="exampleInputEmail1">User Name</label>
-					<input type="userName" ref="userName" className="form-control" id="exampleInputEmail1" placeholder="User Name" />
-				</div>
-				<div className="form-group">
-					<label htmlFor="exampleInputPassword1">Password</label>
-					<input type="password" ref="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-				</div>
-				<button type="submit" className="btn btn-default">Submit</button>
-			</form>
+			<div className="c-user-form">
+				<form ref="formAddUser" onSubmit={this.handleSubmit.bind(this)}>
+					<div className="form-group">
+						<label htmlFor="exampleInputEmail1">User Name</label>
+						<input type="userName" ref="userName" className="form-control" id="exampleInputEmail1" placeholder="User Name" />
+					</div>
+					<div className="form-group">
+						<label htmlFor="exampleInputPassword1">Password</label>
+						<input type="password" ref="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+					</div>
+					<button type="submit" className="btn btn-default">Submit</button>
+				</form>
+			</div>
 		)
 	}
 }
@@ -102,7 +104,7 @@ class MainBody extends React.Component {
 		}).done(function( data ) {
 		  	console.log("Delete User : ", data);
 			_this.getUsers();
-			
+
 		}).fail(function( xhr, status, errorThrown ) {
 			alert( "Sorry, there was a problem!" );
 			console.log( "Error: " + errorThrown );
@@ -117,7 +119,7 @@ class MainBody extends React.Component {
 			<div className="content" role="main">
 				<AddUserForm newUser={this.addNewUser.bind(this)} />
 
-        		<ul>
+        		<ul className="c-user-list">
         			{this.state.users.map(function(user, index) {
           			return (<li key={user._id} data-id={user._id}><b>{index}</b> : {user.userName} <a href="javascript:;" onClick={_this.deleteUser.bind(_this, user._id)}>Delete</a></li>);
         			})}

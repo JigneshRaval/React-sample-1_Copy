@@ -21687,32 +21687,36 @@
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					'form',
-					{ ref: 'formAddUser', onSubmit: this.handleSubmit.bind(this) },
+					'div',
+					{ className: 'c-user-form' },
 					_react2.default.createElement(
-						'div',
-						{ className: 'form-group' },
+						'form',
+						{ ref: 'formAddUser', onSubmit: this.handleSubmit.bind(this) },
 						_react2.default.createElement(
-							'label',
-							{ htmlFor: 'exampleInputEmail1' },
-							'User Name'
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'exampleInputEmail1' },
+								'User Name'
+							),
+							_react2.default.createElement('input', { type: 'userName', ref: 'userName', className: 'form-control', id: 'exampleInputEmail1', placeholder: 'User Name' })
 						),
-						_react2.default.createElement('input', { type: 'userName', ref: 'userName', className: 'form-control', id: 'exampleInputEmail1', placeholder: 'User Name' })
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'form-group' },
 						_react2.default.createElement(
-							'label',
-							{ htmlFor: 'exampleInputPassword1' },
-							'Password'
+							'div',
+							{ className: 'form-group' },
+							_react2.default.createElement(
+								'label',
+								{ htmlFor: 'exampleInputPassword1' },
+								'Password'
+							),
+							_react2.default.createElement('input', { type: 'password', ref: 'password', className: 'form-control', id: 'exampleInputPassword1', placeholder: 'Password' })
 						),
-						_react2.default.createElement('input', { type: 'password', ref: 'password', className: 'form-control', id: 'exampleInputPassword1', placeholder: 'Password' })
-					),
-					_react2.default.createElement(
-						'button',
-						{ type: 'submit', className: 'btn btn-default' },
-						'Submit'
+						_react2.default.createElement(
+							'button',
+							{ type: 'submit', className: 'btn btn-default' },
+							'Submit'
+						)
 					)
 				);
 			}
@@ -21798,7 +21802,7 @@
 					_react2.default.createElement(AddUserForm, { newUser: this.addNewUser.bind(this) }),
 					_react2.default.createElement(
 						'ul',
-						null,
+						{ className: 'c-user-list' },
 						this.state.users.map(function (user, index) {
 							return _react2.default.createElement(
 								'li',
