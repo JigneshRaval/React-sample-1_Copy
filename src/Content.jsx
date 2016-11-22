@@ -37,6 +37,7 @@ class AddUserForm extends React.Component {
 	render() {
 		return (
 			<div className="c-user-form">
+				<h3>Add New User</h3>
 				<form ref="formAddUser" onSubmit={this.handleSubmit.bind(this)}>
 					<div className="form-group">
 						<label htmlFor="exampleInputEmail1">User Name</label>

@@ -21690,6 +21690,11 @@
 					'div',
 					{ className: 'c-user-form' },
 					_react2.default.createElement(
+						'h3',
+						null,
+						'Add New User'
+					),
+					_react2.default.createElement(
 						'form',
 						{ ref: 'formAddUser', onSubmit: this.handleSubmit.bind(this) },
 						_react2.default.createElement(
