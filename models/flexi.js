@@ -13,9 +13,7 @@ db.users.loadDatabase(function (err) {    // Callback is optional
 var UserModel = (function() {
 
 	function createUser(data, callback) {
-		console.log("User Created");
 		db.users.insert({userName : data[0], password: data[1]}, function (err, newDocs) {
-		  	// newDocs is an array with these documents, augmented with their _id
 			console.log("Insert Error :", err, newDocs);
 			callback(newDocs);
 		});
@@ -28,9 +26,17 @@ var UserModel = (function() {
 		});
 	}
 
+    function deleteUser(id, callback) {
+        db.users.remove({ _id: id }, {}, function (err, numRemoved) {
+            // numRemoved = 1
+            callback(numRemoved);
+        });
+    }
+
 	return {
 		createUser: createUser,
-		getUser: getUser
+		getUser: getUser,
+        deleteUser: deleteUser
 	}
 })();
 

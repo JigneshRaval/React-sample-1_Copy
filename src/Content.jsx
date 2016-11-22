@@ -19,15 +19,12 @@ class AddUserForm extends React.Component {
 			data: {userName:formData.userName, password:formData.password}
 		}).done(function( data ) {
 			console.log("User Added : ", data);
-      		/*_this.setState({
-        		users: _this.state.users.concat([data.users])
-      		})*/
+
 			//_this.addNewUser(data);
-			const user = _this.state.users;
-			user.push(data.user);
-			console.log("test :: ", user);
-			_this.setState({ users: user });
-			//_this.props.newUser(data.user);
+			//const user = _this.state.users;
+			//user.push(data.user);
+			//console.log("test :: ", user);
+			_this.props.newUser(data.user);
 			_this.refs.formAddUser.reset();
 		}).fail(function( xhr, status, errorThrown ) {
 			alert( "Sorry, there was a problem!" );
@@ -84,19 +81,45 @@ class MainBody extends React.Component {
 			console.dir( xhr );
 		});
 	}
+
 	addNewUser(data) {
+		const users = this.state.users;
+		users.push(data);
+		console.log("PPP :: ", users);
 		this.setState({
-			users: data.users
+			users: users
 		});
 	}
+
+	deleteUser(id) {
+		console.log("Delete user :", id, this);
+		var _this = this;
+
+		$.ajax({
+		  	url: "/users/"+id,
+		  	type: 'GET',
+		  	dataType: 'json'
+		}).done(function( data ) {
+		  	console.log("Delete User : ", data);
+			_this.getUsers();
+			
+		}).fail(function( xhr, status, errorThrown ) {
+			alert( "Sorry, there was a problem!" );
+			console.log( "Error: " + errorThrown );
+			console.log( "Status: " + status );
+			console.dir( xhr );
+		});
+	}
+
 	render() {
+		var _this = this;
 		return (
 			<div className="content" role="main">
-				<AddUserForm newUser={this.addNewUser} />
+				<AddUserForm newUser={this.addNewUser.bind(this)} />
 
         		<ul>
         			{this.state.users.map(function(user, index) {
-          			return (<li key={user._id}><b>{index}</b> : {user.userName}</li>);
+          			return (<li key={user._id} data-id={user._id}><b>{index}</b> : {user.userName} <a href="javascript:;" onClick={_this.deleteUser.bind(_this, user._id)}>Delete</a></li>);
         			})}
         		</ul>
 			</div>
