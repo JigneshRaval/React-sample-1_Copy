@@ -20,7 +20,12 @@ module.exports = {
         new webpack.ProvidePlugin({
             'window.jQuery': 'jquery',
             'window.$': 'jquery',
-        })
+        }),
+		new webpack.optimize.UglifyJsPlugin({
+			compress:{
+				warnings: true
+			}
+		})
 		/*
 		new webpack.ProvidePlugin({
 			$: "jquery",

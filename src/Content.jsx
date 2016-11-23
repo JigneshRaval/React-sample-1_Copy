@@ -102,7 +102,8 @@ class MainBody extends React.Component {
 		  	type: 'GET',
 		  	dataType: 'json'
 		}).done(function( data ) {
-		  	console.log("Delete User : ", data);
+
+			console.log("Delete User : ", data);
 			_this.getUsers();
 
 		}).fail(function( xhr, status, errorThrown ) {
