@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const UserModel = require('../models/flexi');
+const UserModel = require('../models/user-model');
 
 // route middleware that will happen on every request
 router.use(function(req, res, next){
@@ -10,7 +10,9 @@ router.use(function(req, res, next){
 
 router.post('/home', function(req, res){
 	UserModel.createUser([req.body.userName, req.body.password], function(user) {
-		res.json({user : user});
+		//res.set({'Content-Type': 'application/json'});
+		//res.type('application/json');   // => 'application/json'
+		res.send({user : user});
 	});
 });
 
