@@ -8,7 +8,7 @@ router.use(function(req, res, next){
 	next();
 });
 
-router.post('/home', function(req, res){
+router.post('/addUser', function(req, res){
 	UserModel.createUser([req.body.userName, req.body.password], function(user) {
 		//res.set({'Content-Type': 'application/json'});
 		//res.type('application/json');   // => 'application/json'

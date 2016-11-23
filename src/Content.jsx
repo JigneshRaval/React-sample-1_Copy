@@ -13,7 +13,7 @@ class AddUserForm extends React.Component {
 		}
 		console.log(this.props.newUser);
 		$.ajax({
-			url: "/home",
+			url: "/addUser",
 			type: 'POST',
 			dataType: 'json',
 			data: {userName:formData.userName, password:formData.password}
@@ -38,7 +38,7 @@ class AddUserForm extends React.Component {
 		return (
 			<div className="c-user-form">
 				<h3>Add New User</h3>
-				<form ref="formAddUser" onSubmit={this.handleSubmit.bind(this)}>
+				<form ref="formAddUser" onSubmit={this.handleSubmit.bind(this)} method="POST" action="addUser">
 					<div className="form-group">
 						<label htmlFor="exampleInputEmail1">User Name</label>
 						<input type="userName" ref="userName" className="form-control" id="exampleInputEmail1" placeholder="User Name" />
