@@ -28,8 +28,12 @@ var UserModel = (function() {
 
     function deleteUser(id, callback) {
         db.users.remove({ _id: id }, {}, function (err, numRemoved) {
-            // numRemoved = 1
-            callback(numRemoved);
+            if (err !== null) {
+				callback({ ok: false, message: 'error while posting', error : err });
+			}
+			else {
+                callback(numRemoved);
+            }
         });
     }
 

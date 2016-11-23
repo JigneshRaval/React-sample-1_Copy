@@ -11,7 +11,7 @@ class AddUserForm extends React.Component {
 			userName : this.refs.userName.value,
 			password: this.refs.password.value
 		}
-		console.log(this.props.newUser);
+
 		$.ajax({
 			url: "/addUser",
 			type: 'POST',
@@ -88,7 +88,6 @@ class MainBody extends React.Component {
 	addNewUser(data) {
 		const users = this.state.users;
 		users.push(data);
-		console.log("PPP :: ", users);
 		this.setState({
 			users: users
 		});

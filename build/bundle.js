@@ -21661,7 +21661,7 @@
 					userName: this.refs.userName.value,
 					password: this.refs.password.value
 				};
-				console.log(this.props.newUser);
+
 				$.ajax({
 					url: "/addUser",
 					type: 'POST',
@@ -21772,7 +21772,6 @@
 			value: function addNewUser(data) {
 				var users = this.state.users;
 				users.push(data);
-				console.log("PPP :: ", users);
 				this.setState({
 					users: users
 				});
