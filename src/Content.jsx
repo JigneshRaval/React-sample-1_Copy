@@ -19,7 +19,6 @@ class AddUserForm extends React.Component {
 			data: {userName:formData.userName, password:formData.password}
 		}).done(function( data ) {
 			console.log("User Added : ", data);
-
 			//_this.addNewUser(data);
 			//const user = _this.state.users;
 			//user.push(data.user);
@@ -41,11 +40,11 @@ class AddUserForm extends React.Component {
 				<form ref="formAddUser" onSubmit={this.handleSubmit.bind(this)} method="POST" action="/addUser">
 					<div className="form-group">
 						<label htmlFor="exampleInputEmail1">User Name</label>
-						<input type="userName" ref="userName" className="form-control" id="exampleInputEmail1" placeholder="User Name" />
+						<input type="userName" ref="userName" name="userName" className="form-control" id="exampleInputEmail1" placeholder="User Name" required/>
 					</div>
 					<div className="form-group">
 						<label htmlFor="exampleInputPassword1">Password</label>
-						<input type="password" ref="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+						<input type="password" ref="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password" required/>
 					</div>
 					<button type="submit" className="btn btn-default">Submit</button>
 				</form>
@@ -98,7 +97,7 @@ class MainBody extends React.Component {
 		var _this = this;
 
 		$.ajax({
-		  	url: "/users/"+id,
+		  	url: "/users/delete/"+id,
 		  	type: 'GET',
 		  	dataType: 'json'
 		}).done(function( data ) {
@@ -114,6 +113,19 @@ class MainBody extends React.Component {
 		});
 	}
 
+	viewUserDetail(id) {
+		console.log("User Detail for :", id, this);
+		// url (required), options (optional)
+		window.fetch("/users/"+id, {
+			method: 'GET'
+		}).then(function(response) {
+			console.log("PPP :", response);
+		}).catch(function(err) {
+			// Error :(
+			console.log("Error :", err);
+		});
+	}
+
 	render() {
 		var _this = this;
 		return (
@@ -122,7 +134,7 @@ class MainBody extends React.Component {
 
         		<ul className="c-user-list">
         			{this.state.users.map(function(user, index) {
-          			return (<li key={user._id} data-id={user._id}><b>{index}</b> : {user.userName} <a href="javascript:;" onClick={_this.deleteUser.bind(_this, user._id)}>Delete</a></li>);
+          			return (<li key={user._id} data-id={user._id}><b>{index}</b> : {user.userName} <a href="javascript:;" onClick={_this.viewUserDetail.bind(_this, user._id)}>View Detail</a> <a href={"/users/"+user._id}>View Detail</a> <a href="javascript:;" onClick={_this.deleteUser.bind(_this, user._id)}>Delete</a></li>);
         			})}
         		</ul>
 			</div>

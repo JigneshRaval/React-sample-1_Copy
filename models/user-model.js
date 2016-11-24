@@ -29,7 +29,7 @@ var UserModel = (function() {
     function deleteUser(id, callback) {
         db.users.remove({ _id: id }, {}, function (err, numRemoved) {
             if (err !== null) {
-				callback({ ok: false, message: 'error while posting', error : err });
+				callback({ ok: false, message: 'error while deleting user.', error : err });
 			}
 			else {
                 callback(numRemoved);
@@ -37,10 +37,22 @@ var UserModel = (function() {
         });
     }
 
+	function viewUserDetail(id, callback) {
+        db.users.find({ _id: id }, function (err, docs) {
+            if (err !== null) {
+				callback({ ok: false, message: 'error while getting user detail', error : err });
+			}
+			else {
+                callback();
+            }
+        });
+    }
+
 	return {
 		createUser: createUser,
 		getUser: getUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+		viewUserDetail: viewUserDetail
 	}
 })();
 

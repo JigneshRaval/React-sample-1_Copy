@@ -21689,7 +21689,6 @@
 					data: { userName: formData.userName, password: formData.password }
 				}).done(function (data) {
 					console.log("User Added : ", data);
-
 					//_this.addNewUser(data);
 					//const user = _this.state.users;
 					//user.push(data.user);
@@ -21725,7 +21724,7 @@
 								{ htmlFor: 'exampleInputEmail1' },
 								'User Name'
 							),
-							_react2.default.createElement('input', { type: 'userName', ref: 'userName', className: 'form-control', id: 'exampleInputEmail1', placeholder: 'User Name' })
+							_react2.default.createElement('input', { type: 'userName', ref: 'userName', name: 'userName', className: 'form-control', id: 'exampleInputEmail1', placeholder: 'User Name', required: true })
 						),
 						_react2.default.createElement(
 							'div',
@@ -21735,7 +21734,7 @@
 								{ htmlFor: 'exampleInputPassword1' },
 								'Password'
 							),
-							_react2.default.createElement('input', { type: 'password', ref: 'password', className: 'form-control', id: 'exampleInputPassword1', placeholder: 'Password' })
+							_react2.default.createElement('input', { type: 'password', ref: 'password', name: 'password', className: 'form-control', id: 'exampleInputPassword1', placeholder: 'Password', required: true })
 						),
 						_react2.default.createElement(
 							'button',
@@ -21803,7 +21802,7 @@
 				var _this = this;
 
 				$.ajax({
-					url: "/users/" + id,
+					url: "/users/delete/" + id,
 					type: 'GET',
 					dataType: 'json'
 				}).done(function (data) {
@@ -21815,6 +21814,20 @@
 					console.log("Error: " + errorThrown);
 					console.log("Status: " + status);
 					console.dir(xhr);
+				});
+			}
+		}, {
+			key: 'viewUserDetail',
+			value: function viewUserDetail(id) {
+				console.log("User Detail for :", id, this);
+				// url (required), options (optional)
+				window.fetch("/users/" + id, {
+					method: 'GET'
+				}).then(function (response) {
+					console.log("PPP :", response);
+				}).catch(function (err) {
+					// Error :(
+					console.log("Error :", err);
 				});
 			}
 		}, {
@@ -21839,6 +21852,18 @@
 								),
 								' : ',
 								user.userName,
+								' ',
+								_react2.default.createElement(
+									'a',
+									{ href: 'javascript:;', onClick: _this.viewUserDetail.bind(_this, user._id) },
+									'View Detail'
+								),
+								' ',
+								_react2.default.createElement(
+									'a',
+									{ href: "/users/" + user._id },
+									'View Detail'
+								),
 								' ',
 								_react2.default.createElement(
 									'a',
