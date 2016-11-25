@@ -32,7 +32,7 @@ export default App;
 */
 
 // JavaScript Expressions
-/* 
+/*
 import React from 'react';
 class App extends React.Component {
    render() {
@@ -42,7 +42,7 @@ class App extends React.Component {
          </div>
       );
    }
-   
+
    // Ternary COnditions
    render() {
       var i = 1;
@@ -56,7 +56,7 @@ class App extends React.Component {
 export default App;
 */
 
-// Styling and comments 
+// Styling and comments
 /*
 import React from 'react';
 class App extends React.Component {
@@ -70,19 +70,19 @@ class App extends React.Component {
       return (
          <div>
             <h1 style = {myStyle}>Header</h1>
-         </div>		 
-		 
+         </div>
+
         {//End of the line Comment...}
         {/* Multi line comment... /*}
-         
-      );	  
+
+      );
    }
 }
 export default App;
 */
 
 
-///  Stateless Components 
+///  Stateless Components
 /*
 import React from 'react';
 class App extends React.Component {
@@ -126,22 +126,22 @@ import React from 'react';
 class App extends React.Component {
    constructor() {
       super();
-		
+
       this.state = {
-         data: 
+         data:
          [
             {
                "id":1,
                "name":"Foo",
                "age":"20"
             },
-				
+
             {
                "id":2,
                "name":"Bar",
                "age":"30"
             },
-				
+
             {
                "id":3,
                "name":"Baz",
@@ -150,7 +150,7 @@ class App extends React.Component {
          ]
       }
    }
-	
+
    render() {
       return (
          <div>
@@ -189,20 +189,20 @@ class TableRow extends React.Component {
 export default App;
 */
 
-// State 
+// State
 /*
 import React from 'react';
 
 class App extends React.Component {
    constructor(props) {
       super(props);
-		
+
       this.state = {
          header: "Header from state...",
          "content": "Content from state..."
       }
    }
-	
+
    render() {
       return (
          <div>
@@ -215,7 +215,7 @@ class App extends React.Component {
 export default App;
 */
 
-// Props 
+// Props
 /*
 // Affected changes needed in main.js
 import React from 'react';
@@ -262,13 +262,13 @@ import React from 'react';
 class App extends React.Component {
    constructor(props) {
       super(props);
-		
+
       this.state = {
          header: "Header from props...",
          "content": "Content from props..."
       }
    }
-	
+
    render() {
       return (
          <div>
@@ -336,7 +336,7 @@ App.defaultProps = {
    propFunc: function(e){return e},
    propNumber: 1,
    propString: "String value...",
-	
+
    propObject: {
       objectName1:"objectValue1",
       objectName2: "objectValue2",
@@ -347,17 +347,17 @@ export default App;
 */
 
 
-// Component API - setState() 
+// Component API - setState()
 /*
 import React from 'react';
 class App extends React.Component {
    constructor() {
       super();
-		
+
       this.state = {
          data: []
       }
-	
+
       this.setStateHandler = this.setStateHandler.bind(this);
    };
 
@@ -422,7 +422,7 @@ class App extends React.Component {
       var myDiv = document.getElementById('myDiv');
       ReactDOM.findDOMNode(myDiv).style.color = 'green';
    }
-	
+
    render() {
       return (
          <div>
@@ -435,7 +435,7 @@ class App extends React.Component {
 export default App
 */
 
-// Component Life Cycle 
+// Component Life Cycle
 // ( affected changes needed in main.js)
 /*
 import React from 'react';
@@ -443,7 +443,7 @@ class App extends React.Component {
 
    constructor(props) {
       super(props);
-		
+
       this.state = {
          data: 0
       }
@@ -475,7 +475,7 @@ class Content extends React.Component {
       console.log('Component DID MOUNT!')
    }
 
-   componentWillReceiveProps(newProps) {    
+   componentWillReceiveProps(newProps) {
       console.log('Component WILL RECIEVE PROPS!')
    }
 
@@ -494,7 +494,7 @@ class Content extends React.Component {
    componentWillUnmount() {
       console.log('Component WILL UNMOUNT!')
    }
-	
+
    render() {
       return (
          <div>
@@ -506,13 +506,13 @@ class Content extends React.Component {
 export default App;
 */
 
-// Simple Form 
+// Simple Form
 /*
 import React from 'react';
 class App extends React.Component {
    constructor(props) {
       super(props);
-		
+
       this.state = {
          data: 'Initial data...'
       }
@@ -528,7 +528,7 @@ class App extends React.Component {
    render() {
       return (
          <div>
-            <input type = "text" value = {this.state.data} 
+            <input type = "text" value = {this.state.data}
                onChange = {this.updateState} />
             <h4>{this.state.data}</h4>
          </div>
@@ -545,7 +545,7 @@ import React from 'react';
 class App extends React.Component {
 
    constructor(props) {
-      super(props);		
+      super(props);
       this.state = {
          data: 'Initial data...'
       }
@@ -559,7 +559,7 @@ class App extends React.Component {
    render() {
       return (
          <div>
-            <Content myDataProp = {this.state.data} 
+            <Content myDataProp = {this.state.data}
                updateStateProp = {this.updateState}></Content>
          </div>
       );
@@ -570,7 +570,7 @@ class Content extends React.Component {
    render() {
       return (
          <div>
-            <input type = "text" value = {this.props.myDataProp} 
+            <input type = "text" value = {this.props.myDataProp}
                onChange = {this.props.updateStateProp} />
             <h3>{this.props.myDataProp}</h3>
          </div>
@@ -585,7 +585,7 @@ export default App;
 import React from 'react';
 class App extends React.Component {
    constructor(props) {
-      super(props);		
+      super(props);
       this.state = {
          data: 'Initial data...'
       }
@@ -597,7 +597,7 @@ class App extends React.Component {
    render() {
       return (
          <div>
-            <Content myDataProp = {this.state.data} 
+            <Content myDataProp = {this.state.data}
                updateStateProp = {this.updateState}></Content>
          </div>
       );
@@ -617,26 +617,26 @@ class Content extends React.Component {
 export default App;
 */
 
-// React Keys 
+// React Keys
 /*
 import React from 'react';
 class App extends React.Component {
    constructor() {
       super();
-		
+
       this.state = {
-         data: 
+         data:
          [
             {
                component: 'First...',
                id: 1
             },
-				
+
             {
                component: 'Second...',
                id: 2
             },
-				
+
             {
                component: 'Third...',
                id: 3

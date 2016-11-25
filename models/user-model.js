@@ -43,7 +43,7 @@ var UserModel = (function() {
 				callback({ ok: false, message: 'error while getting user detail', error : err });
 			}
 			else {
-                callback();
+                callback(docs);
             }
         });
     }

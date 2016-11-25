@@ -1,20 +1,37 @@
-import React from 'react';
+// SETUP REACT
+//==========================================
+import React, {component} from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router';
+
+// IMPORT REACT MODULES
+//==========================================
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 import MainBody from './Content.jsx';
+import ProfileView from './profile-view.jsx';
 
 // Main App Code
-var App = React.createClass({
-	render: function(){
+class App extends React.Component {
+	render(){
 		return (
-			<section>
+			<div className="main-body" role="main">
+				{/* HEADER SECTION */}
 				<Header />
-				<MainBody />
+
+				{/* ROUTERS */}
+				<div className="content" role="main">
+					<Router history={browserHistory}>
+						<Route path="/" component={MainBody} />
+						<Route path="/users/:id" component={ProfileView} />
+					</Router>
+				</div>
+
+				{/* FOOTER SECTION */}
 				<Footer year="2016"/>
-			</section>
+			</div>
 		)
 	}
-});
+};
 
-ReactDOM.render(<App message="Hi React" />, document.querySelector('#app'));
+ReactDOM.render(<App />, document.querySelector('#app'));
