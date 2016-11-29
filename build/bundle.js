@@ -26873,34 +26873,30 @@
 		}
 
 		_createClass(ProfileView, [{
-			key: "viewUserDetail",
-			value: function viewUserDetail(id) {
-				//var id = this.props.userid;
-				console.log("User Detail for :", id, this);
-				// url (required), options (optional)
-				window.fetch("/users/" + id, {
-					method: 'GET'
-				}).then(function (response) {
-					console.log("PPP :", response);
-				}).catch(function (err) {
-					// Error :(
-					console.log("Error :", err);
-				});
-			}
-		}, {
 			key: "render",
 			value: function render() {
-				console.log(this.props.params.id, data);
-				this.viewUserDetail(this.props.params.id);
+				console.log(this.props.params.id, data[0]);
+
 				return _react2.default.createElement(
 					"div",
 					{ className: "c-user-profile" },
+					_react2.default.createElement(
+						"b",
+						null,
+						this.props.datauser
+					),
 					_react2.default.createElement("img", { src: "images/user-default.jpg" }),
 					_react2.default.createElement(
 						"h3",
 						null,
 						"User Name ",
-						this.props.params.id
+						this.props.params.id,
+						", ",
+						data[0].userName,
+						",",
+						_react2.default.createElement("br", null),
+						" ",
+						data[0].password
 					),
 					_react2.default.createElement(
 						"address",

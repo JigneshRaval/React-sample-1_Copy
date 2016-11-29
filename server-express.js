@@ -41,7 +41,7 @@ app.engine('ntl', function (filePath, options, callback) { // define the templat
 		if (err) return callback(err)
 		// this is an extremely simple template engine
 		var rendered = content.toString().replace('#title#', '<title>' + options.title + '</title>')
-										 .replace('#message#', options.message)
+										 .replace(/#message#/gi, options.message)
 		return callback(null, rendered)
 	})
 })

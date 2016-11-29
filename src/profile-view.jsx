@@ -15,27 +15,14 @@ class ProfileView extends React.Component {
 		super();
 	}
 
-	viewUserDetail(id) {
-		//var id = this.props.userid;
-		console.log("User Detail for :", id, this);
-		// url (required), options (optional)
-		window.fetch("/users/"+id, {
-			method: 'GET'
-		}).then(function(response) {
-			console.log("PPP :", response);
-		}).catch(function(err) {
-			// Error :(
-			console.log("Error :", err);
-		});
-	}
-
 	render() {
-		console.log(this.props.params.id, data);
-		this.viewUserDetail(this.props.params.id);
+		console.log(this.props.params.id, data[0]);
+
 		return (
 			<div className="c-user-profile">
+				<b>{this.props.datauser}</b>
 				<img src="images/user-default.jpg" />
-				<h3>User Name {this.props.params.id}</h3>
+				<h3>User Name {this.props.params.id}, { data[0].userName },<br/> {data[0].password }</h3>
 				<address>45, New Park Society</address>
 			</div>
 		)
